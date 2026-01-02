@@ -14,7 +14,7 @@ const useStore = create<intialState>((set) => ({
   
   initializeUser: () => {
     const stored = localStorage.getItem('gallery_user');
-    if (stord) {
+    if (stored) {
       set({ user: JSON.parse(stored) });
     } else {
       const newUser = generateIdentity();
