@@ -58,23 +58,23 @@ const ImageView: React.FC<ImageViewProps> = ({ image, onClose }) => {
         <X size={24} />
       </button>
       
-      <div className="bg-white rounded-xl overflow-hidden max-w-4xl w-full max-h-[90vh] flex flex-col md:flex-row">
+      <div className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden max-w-4xl w-full max-h-[90vh] flex flex-col md:flex-row">
         <div className="md:w-2/3 bg-black flex items-center justify-center">
           <img src={image.urls.regular} alt={image.alt_description} className="max-h-[60vh] md:max-h-full w-auto object-contain" />
         </div>
 
         <div className="md:w-1/3 flex flex-col h-[50vh] md:h-auto">
-          <div className="p-4 border-b">
-            <h3 className="font-bold text-gray-800 mb-2">Reactions</h3>
+          <div className="p-4 border-b dark:border-gray-800">
+            <h3 className="font-bold text-gray-800  dark:text-white mb-2">Reactions</h3>
             <div className="flex gap-2">
               {['🔥', '❤️', '👍', '🎉'].map(emoji => (
                 <button 
                   key={emoji}
                   onClick={() => addReaction(emoji)}
-                  className="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-full text-lg transition-colors flex items-center gap-1"
+                  className="px-3 py-1 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-full text-lg transition-colors flex items-center gap-1"
                 >
                   <span>{emoji}</span>
-                  <span className="text-xs font-bold text-gray-600">{emojiCounts[emoji] || 0}</span>
+                  <span className="text-xs font-bold text-gray-600 dark:text-gray-400">{emojiCounts[emoji] || 0}</span>
                 </button>
               ))}
             </div>
@@ -84,18 +84,18 @@ const ImageView: React.FC<ImageViewProps> = ({ image, onClose }) => {
             {(data?.comments || []).map(comment => (
               <div key={comment.id} className="text-sm">
                 <span className="font-bold" style={{ color: comment.userColor }}>{comment.userName}: </span>
-                <span className="text-gray-700">{comment.text}</span>
+                <span className="text-gray-700 dark:text-gray-300">{comment.text}</span>
               </div>
             ))}
           </div>
 
-          <form onSubmit={addComment} className="p-4 border-t bg-gray-50">
+          <form onSubmit={addComment} className="p-4 border-t bg-gray-50 dark:bg-gray-900 dark:border-gray-800">
             <input
               type="text"
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
               placeholder="Add a comment..."
-              className="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-blue-500 outline-none"
+              className="w-full px-4 py-2 rounded-lg border focus:ring-2 focus:ring-blue-500 outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-white"
             />
           </form>
         </div>

@@ -7,6 +7,7 @@ import useStore from '../store';
 import Feed from '../components/Feed';
 import ImageView from '../components/ImageView';
 import { UnsplashImage } from '../types';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const App: React.FC = () => {
   const { initializeUser, user } = useStore();
@@ -24,18 +25,21 @@ const App: React.FC = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-950">
       <Feed />
 
       <div className="md:ml-[25%] p-4 md:p-8">
         <header className="mb-8 flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-gray-900">Sync Shot</h1>
-          {user && (
-            <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: user.color }} />
-              <span className="text-sm font-medium text-gray-600">{user.nickname}</span>
-            </div>
-          )}
+          <h1 className="text-3xl font-bold text-gray-900 dark:bg-gray-950">Sync Shot</h1>
+          <div className='flex justify-center items-center gap-5' >
+            {user && (
+              <div className="flex items-center gap-2 bg-white dark:bg-gray-800 px-4 py-2 rounded-full shadow-sm">
+                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: user.color }} />
+                <span className="text-sm font-medium text-gray-600 dark:bg-gray-800">{user.nickname}</span>
+              </div>
+            )}
+            <ThemeToggle />
+          </div>
         </header>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
