@@ -1,6 +1,7 @@
 import React from 'react';
 import { db } from '../db';
 import { DBComment, DBReaction } from '../types';
+import Loader from './Loader';
 
 type FeedItem = 
   | (DBComment & { type: 'comment' }) 
@@ -8,17 +9,17 @@ type FeedItem =
 
 const Feed: React.FC = () => {
   const { isLoading, error, data } = db.useQuery({
-    comments: { $: { limit: 10 } },
-    reactions: { $: { limit: 10, } },
+    comments: { $: { limit: 100 } },
+    reactions: { $: { limit: 100 } },
   });
 
-  if (isLoading) return <div className="p-4 text-gray-500">Loading feed...</div>;
-  if (error) return <div className="p-4 text-red-500">Feed Error</div>;
+  if (isLoading) return <div className="w-full md:w-1/4 bg-gray-50 border-r border-gray-200 h-screen overflow-y-auto fixed left-0 top-0 hidden md:block p-4"><Loader/></div>;
+  if (error) return <div className="p-4 text-red-500">Can't Fetch</div>;
 
   const comments = (data?.comments || []) as DBComment[];
   const reactions = (data?.reactions || []) as DBReaction[];
 
-  const feedItems: FeedItem[] = [
+  const feedItems:FeedItem[] = [
     ...comments.map(c => ({ ...c, type: 'comment' } as const)),
     ...reactions.map(r => ({ ...r, type: 'reaction' } as const))
   ].sort((a, b) => b.createdAt - a.createdAt).slice(0, 15);

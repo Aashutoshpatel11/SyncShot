@@ -18,9 +18,9 @@ const ImageView: React.FC<ImageViewProps> = ({ image, onClose }) => {
     reactions: { $: { where: { imageId: image.id } } },
   });
 
-  const addReaction = (emoji: string) => {
+  const addReaction = async (emoji: string) => {
     if (!user) return;
-    db.transact(
+    await db.transact(
       db.tx.reactions[crypto.randomUUID()].update({
         imageId: image.id,
         emoji,
