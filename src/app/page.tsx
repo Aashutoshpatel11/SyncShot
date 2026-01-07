@@ -12,6 +12,7 @@ import ThemeToggle from '@/components/ThemeToggle';
 const App: React.FC = () => {
   const { initializeUser, user } = useStore();
   const [ selectedImage, setSelectedImage ] = useState<UnsplashImage | null>(null);
+  const [isFeedOpen, setIsFeedOpen] = useState(false);
 
   useEffect(() => {
     initializeUser();
@@ -26,10 +27,16 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-950">
-      <Feed />
+      <Feed isOpen={isFeedOpen} onClose={() => setIsFeedOpen(false)} />
 
-      <div className="md:ml-[25%] p-4 md:p-8">
+      <div className="ml-0 md:ml-[25%]  p-4 md:p-8">
         <header className="mb-8 flex justify-between items-center">
+          <button 
+            onClick={() => setIsFeedOpen(true)}
+            className="md:hidden p-2 -ml-2 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-black/5 animate-bounce"
+          >
+            &#128276;
+          </button>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 dark:bg-gray-950">Sync Shot</h1>
           <div className='flex justify-center items-center gap-5' >
             {user && (
@@ -40,6 +47,7 @@ const App: React.FC = () => {
             )}
             <ThemeToggle />
           </div>
+          
         </header>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
