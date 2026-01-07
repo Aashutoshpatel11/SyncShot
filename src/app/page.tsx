@@ -30,7 +30,7 @@ const App: React.FC = () => {
 
       <div className="md:ml-[25%] p-4 md:p-8">
         <header className="mb-8 flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-gray-900 dark:bg-gray-950">Sync Shot</h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 dark:bg-gray-950">Sync Shot</h1>
           <div className='flex justify-center items-center gap-5' >
             {user && (
               <div className="flex items-center gap-2 bg-white dark:bg-gray-800 px-4 py-2 rounded-full shadow-sm">
