@@ -2,7 +2,6 @@ import React from 'react';
 import { db } from '../db';
 import { DBComment, DBReaction } from '../types';
 import Loader from './Loader';
-import { Link } from 'react-router-dom';
 
 type FeedItem = 
   | (DBComment & { type: 'comment' }) 
