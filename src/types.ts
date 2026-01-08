@@ -10,14 +10,11 @@ export interface UnsplashImage {
   }
 }
  
-
 export interface UserProfile {
   id: string
   nickname: string
   color: string
 }
-
-
 
 export interface DBComment {
   id: string
@@ -36,7 +33,6 @@ export interface DBReaction {
   userColor: string
   createdAt: number
 }
-
 
 export interface AppSchema {
   comments: DBComment

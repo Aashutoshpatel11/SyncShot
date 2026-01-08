@@ -18,9 +18,6 @@ const Feed= ({ isOpen, onClose }:FeedProps) => {
     reactions: { $: { limit: 100 } },
   });
 
-  if (isLoading) return <div className="w-full md:w-1/4 bg-gray-50 border-r border-gray-200 h-screen overflow-y-auto fixed left-0 top-0 hidden md:block p-4"><Loader/></div>;
-  if (error) return <div className="p-4 text-red-500">Can't Fetch</div>;
-
   const comments = (data?.comments || []) as DBComment[];
   const reactions = (data?.reactions || []) as DBReaction[];
 
@@ -29,8 +26,10 @@ const Feed= ({ isOpen, onClose }:FeedProps) => {
     ...reactions.map(r => ({ ...r, type: 'reaction' } as const))
   ].sort((a, b) => b.createdAt - a.createdAt).slice(0, 15);
 
-  console.log("ITEMS::", feedItems);
-  
+  // console.log("ITEMS::", feedItems);
+
+  if (isLoading) return <div className="w-full md:w-1/4 bg-gray-50 border-r border-gray-200 h-screen overflow-y-auto fixed left-0 top-0 hidden md:block p-4"><Loader/></div>;
+  if (error) return <div className="p-4 text-red-500">Can't Fetch</div>;
 
   return (
     <>
